@@ -1,0 +1,94 @@
+#body-override {
+    background-color: #122C3D ;
+}
+
+#splashImage {
+    height: 200px; 
+    width: 200px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -100px;
+    margin-left: -100px;
+}
+
+#topbar {
+    background-color: #122C3D;
+    height: 70px;
+    width: 100%;
+    padding-top: 5px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#topbar h1 {
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    color: gainsboro;
+    font-size: 30px;
+    margin: 0;
+    display: none;
+}
+
+#topbar img {
+    height: 50px; 
+    width: 50px;
+    display: none;
+}
+
+#mainSelector {
+    background-color: #252528;
+    margin: 20px;
+    text-align: center;
+    display: none;
+    height: 250px;
+}
+
+#mainSelector h1 {
+   font-family: 'Montserrat', sans-serif; 
+   color: gainsboro;
+}
+
+#mainSelector .brandButton {
+    margin: 20px;
+    font-family: 'Montserrat', sans-serif; 
+    font-weight: 300; 
+    background-color: #122C3D;
+    color: gainsboro; 
+    border-color: gainsboro;
+    width: 100px;
+}
+
+#myCarousel {
+    display: none;
+}
+
+.camera-item {
+    height: 450px;
+    margin: 0 120px;
+}
+
+.camera-item img {
+    display: block; 
+    margin: 20px auto; 
+    height: 300px !important; 
+    width: auto;
+}
+
+.camera-item h1 {
+    font-weight: 300;
+    font-size: 30px !important;
+}
+
+#cameraSubmit {
+    display: none;
+    margin: 20px;
+    font-family: 'Montserrat', sans-serif; 
+    font-weight: 500; 
+    background-color: #122C3D;
+    color: gainsboro; 
+    border-color: gainsboro;
+    width: 200px; 
+    height: 50px; 
+}
