@@ -1,11 +1,3 @@
-var amazon = require("amz-products");
-
-// VARIABLES
-var amazon_AccessKey = "Your Access Key Here";
-var amazon_SecretKey = "Your Secret Key Here";
-var amazon_AssociateTag = "Your Associate Tag Here"; 
-
-
 // DATA 
 var canonArray = [
     {
@@ -165,29 +157,36 @@ function getCameras(kitType) {
     
     var activeContext;
     var inactiveContext;
+    var currentArray;
 
     var brand = $(kitType).attr("id"); 
     if (brand == "canonKit") {
         console.log("canon");
+        currentArray = canonArray.slice(0);
 
-        var activeImage = canonArray.splice(0,1);
+        var activeImage = currentArray.splice(0,1);
 
         activeContext = {activeImg : activeImage[0]};
-        inactiveContext = {inactiveURLs : canonArray};
+        inactiveContext = {inactiveURLs : currentArray};
+        $(".item .active").remove();
     } else if (brand == "nikonKit") {
         console.log("nikon");
+        currentArray = nikonArray.slice(0);
 
-        var activeImage = nikonArray.splice(0,1);
+        var activeImage = currentArray.splice(0,1);
 
         activeContext = {activeImg : activeImage[0]};
-        inactiveContext = {inactiveURLs : nikonArray};
+        inactiveContext = {inactiveURLs : currentArray};
+        $(".item .active").remove();
     } else if (brand == "sonyKit") {
         console.log("sony");
-        
-        var activeImage = sonyArray.splice(0,1);
+        currentArray = sonyArray.slice(0);
+
+        var activeImage = currentArray.splice(0,1);
 
         activeContext = {activeImg : activeImage[0]};
-        inactiveContext = {inactiveURLs : sonyArray};
+        inactiveContext = {inactiveURLs : currentArray};
+        $(".item .active").remove();
     }
 
     var activeHTML = activeTemplate(activeContext); 
@@ -210,7 +209,9 @@ function getCameraPrices (kitType) {
     }
 
     for (var i = 0; i < brandArray.length; i++) {
-        // get the latest price for the current camera element 
-
+        // get the latest price for the current camera element
+        $.get("http://localhost:8080/api/prices/" + brandArray[i].name, function (res){
+            console.log("Response:" + JSON.stringify(res));
+        });
     }
 }
