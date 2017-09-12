@@ -3,9 +3,9 @@ var app = express();
 var AmazonAPI = require("amz-products");
 
 var amazon = new AmazonAPI({
-  accessKeyId     : "Your access key", 
-  secretAccessKey : "Your secret access key", 
-  associateId     : "your associate tag",
+  accessKeyId     : "Your access key here", 
+  secretAccessKey : "Your secret key here", 
+  associateId     : "Your associate tag here",
   locale : "US"
 });
 
@@ -27,7 +27,7 @@ router.get('/prices/:cameraBody', function (req, res) {
     }, function(err, response){
         res.json({name: req.params.cameraBody, priceSummary: response["ItemSearchResponse"]["Items"]["Item"][0]});
     });
-    console.log("GET: Search Results ");
+    console.log("GET: Search Results for " + req.params.cameraBody);
 });
 
 app.use("/api", router);

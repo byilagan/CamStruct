@@ -72,13 +72,18 @@
 .camera-item img {
     display: block; 
     margin: 20px auto; 
-    height: 300px !important; 
+    height: 250px !important; 
     width: auto;
 }
 
 .camera-item h1 {
     font-weight: 300;
     font-size: 30px !important;
+}
+
+.camera-item h3 {
+    font-weight: 300;
+    color: gainsboro;
 }
 
 #cameraSubmit {
