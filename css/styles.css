@@ -20,14 +20,16 @@
     display:flex;
     align-items: center;
     justify-content: center;
+    margin: 0;
 }
 
-#topbar h1 {
+#topbar a {
     font-family: 'Montserrat', sans-serif;
     text-align: center;
     color: gainsboro;
     font-size: 30px;
     margin: 0;
+    padding: 15px 0;
     display: none;
 }
 
@@ -39,10 +41,12 @@
 
 #mainSelector {
     background-color: #252528;
-    margin: 20px;
+    margin: 80px 20px;
+    margin-bottom: 0;
     text-align: center;
     display: none;
     height: 250px;
+    box-shadow: 2px 2px 5px #888888;
 }
 
 #mainSelector h1 {
@@ -77,12 +81,13 @@
 }
 
 .camera-item h1 {
-    font-weight: 300;
+    font-weight: 500;
     font-size: 30px !important;
 }
 
 .camera-item h3 {
     font-weight: 300;
+    font-size: 20px;
     color: gainsboro;
 }
 
@@ -96,4 +101,77 @@
     border-color: gainsboro;
     width: 200px; 
     height: 50px; 
+}
+
+/* SIDEBAR */ 
+#wrapper {
+  padding-left: 0;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+#wrapper.toggled {
+  padding-left: 250px;
+}
+
+#sidebar-wrapper {
+  z-index: 1000;
+  position: fixed;
+  left: 250px;
+  width: 0;
+  height: 100%;
+  margin-left: -250px;
+  padding-top: 70px;
+  overflow-y: auto;
+  background: #252528;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  color: gainsboro; 
+  box-shadow: 2px 2px 5px #888888;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+  width: 250px;
+}
+
+#page-content-wrapper {
+  width: 100%;
+  position: absolute;
+  padding-top: 5px;
+}
+
+#wrapper.toggled #page-content-wrapper {
+  position: absolute;
+  margin-right: -250px;
+}
+
+#totalDisplay {
+    position: absolute; 
+    bottom: 0px; 
+    width: 100%;
+    padding: 10px;
+    background-color: #171718;
+}
+
+#totalDisplay h1{
+    font-size: 25px; 
+    font-weight: 500;
+    font-family: 'Montserrat', sans-serif;
+}
+
+#productTable {
+    font-family: 'Montserrat', sans-serif;
+}
+
+#productTable td {
+    vertical-align: middle;
+}
+
+#productTable img {
+    height: 40px;
+    width: auto;
 }

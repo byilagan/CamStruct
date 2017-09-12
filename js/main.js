@@ -1,4 +1,4 @@
-// DATA 
+// VARIABLES
 var canonArray = [
     {
         name : "Canon t7i",
@@ -68,6 +68,10 @@ var sonyArray = [
     }
 ];
 
+var chosenArray; // Chosen brand 
+var selectedProducts = [] // All chosen products
+var totalPrice = 0; // Total price of all chosen products
+
 // ON READY 
 $(function () {
 
@@ -87,32 +91,49 @@ $(function () {
     }, 300)
 
     // Fade in topbar branding
-    $("#topbar h1").delay(2000).fadeIn(300);
+    $("#topbar a").delay(2000).fadeIn(300);
     $("#topbar img").delay(2000).fadeIn(300);
-
     $("#mainSelector").delay(2000).fadeIn(300);
 });
 
 // EVENTS 
 $("#canonKit").on("click", function () {
+    chosenArray = canonArray;
     carouselSetUp(this);
 });
 
 $("#nikonKit").on("click", function () {
+    chosenArray = nikonArray;
     carouselSetUp(this);
 });
 
 $("#sonyKit").on("click", function () {
+    chosenArray = sonyArray;
     carouselSetUp(this);
 }); 
 
 $("#cameraSubmit").on("click", function () {
-    var chosenItem = $(".active h1").html();
-    console.log(chosenItem);
+    var chosenBody = $(".active h1").html();
+
+    // Opens sidebar and adjust mainSelector width
+    $("#wrapper").addClass("toggled");
+    $("#page-content-wrapper").css("width", "calc(100% - 250px)");
+
+    // Fades out carousel and shrinks mainSelector 
+    $("#myCarousel").fadeOut(300);
+    $("#cameraSubmit").fadeOut(300);
+    $("#mainSelector").delay(300).animate({
+        height: '250px'
+    }, 500);
+
+    addTableItem(chosenBody);
+    updateTable();
+     
+    console.log(chosenBody);
 });
 
 // FUNCTIONS 
-function carouselSetUp(kitType) {
+function carouselSetUp() {
     $("#mainSelector h1").fadeOut(300); 
     $("#mainSelector .brandButton").fadeOut(300);
 
@@ -120,10 +141,10 @@ function carouselSetUp(kitType) {
         height: '600px'
     }, 700)
 
-    getCameraPrices(kitType);
+    getCameraPrices();
 
     $(document).ajaxStop(function () {
-        getCameras(kitType);
+        getCameras();
 
         $("#myCarousel").delay(500).fadeIn(300);
         $("#cameraSubmit").delay(500).fadeIn(300);
@@ -131,29 +152,18 @@ function carouselSetUp(kitType) {
 }
 
 // Gets the latest prices for the camera bodies of the selected brand
-function getCameraPrices (kitType) {
-    var brandArray; // array that corresponds the selected brand
-    var brand = $(kitType).attr("id"); 
-
-    if (brand == "canonKit") {
-        brandArray = canonArray;
-    } else if (brand == "nikonKit") {
-        brandArray = nikonArray; 
-    } else if (brand == "sonyKit") { 
-        brandArray = sonyArray;
-    }
-
+function getCameraPrices () {
     // Gets all the camera prices
-    for (var i = 0; i < brandArray.length; i++) {
+    for (var i = 0; i < chosenArray.length; i++) {
         // get the latest price for the current camera element
     
         (function (index) {
             $.ajax({
-                url: "http://localhost:8080/api/prices/" + brandArray[index].name, 
+                url: "http://localhost:8080/api/prices/" + chosenArray[index].name, 
                 type: "GET",
                 success: function (res) {
-                        brandArray[index]["price"] = (res["priceSummary"]["OfferSummary"]["LowestNewPrice"]["Amount"])/100;
-                        brandArray[index]["formattedPrice"] = res["priceSummary"]["OfferSummary"]["LowestNewPrice"]["FormattedPrice"]; 
+                        chosenArray[index]["price"] = (res["priceSummary"]["OfferSummary"]["LowestNewPrice"]["Amount"])/100;
+                        chosenArray[index]["formattedPrice"] = res["priceSummary"]["OfferSummary"]["LowestNewPrice"]["FormattedPrice"]; 
                 }   
             });
         })(i);
@@ -161,7 +171,7 @@ function getCameraPrices (kitType) {
 }
 
 // Fills in the camera carousel based on the brand the user chooses
-function getCameras(kitType) {
+function getCameras() {
 
     // Handlebars template setup
     var activeSource = $("#active-template").html();
@@ -169,31 +179,48 @@ function getCameras(kitType) {
 
     var  activeTemplate = Handlebars.compile(activeSource); 
     var inactiveTemplate = Handlebars.compile(inactiveSource); 
-    
-    var activeContext;
-    var inactiveContext;
-    var currentArray;
 
-    var brand = $(kitType).attr("id"); 
-    if (brand == "canonKit") {
-        console.log("canon");
-        currentArray = canonArray.slice(0);
-    } else if (brand == "nikonKit") {
-        console.log("nikon");
-        currentArray = nikonArray.slice(0);
-    } else if (brand == "sonyKit") {
-        console.log("sony");
-        currentArray = sonyArray.slice(0);
-    }
+    currentArray = chosenArray.slice(0);
 
     var activeImage = currentArray.splice(0,1);
 
-    activeContext = {activeImg : activeImage[0]};
-    inactiveContext = {inactiveURLs : currentArray};
+    var activeContext = {activeImg : activeImage[0]};
+    var inactiveContext = {inactiveURLs : currentArray};
 
     var activeHTML = activeTemplate(activeContext); 
     var inactiveHTML = inactiveTemplate(inactiveContext);
 
     $('#myCarousel .carousel-inner').append(activeHTML);
     $('#myCarousel .carousel-inner').append(inactiveHTML);
+}
+
+// Adds a table cell to the product sidebar
+function addTableItem(body) {
+    var bodyObj;
+
+    for (var i = 0; i < chosenArray.length; i++) { 
+        if (chosenArray[i].name == body) {
+            selectedProducts.push(chosenArray[i]);
+        }
+    }
+}
+
+function updateTable() {
+
+    //update item list
+    for (var i = 0; i < selectedProducts.length; i++) {
+        var tableSource = $("#table-cell-template").html();
+
+        var tableTemplate = Handlebars.compile(tableSource);
+
+        var tableContext = {item : selectedProducts[i]};
+
+        var tableHTML = tableTemplate(tableContext); 
+
+        $("#productTable tbody").append(tableHTML);
+
+        totalPrice += selectedProducts[i].price; 
+    }   
+
+    $("#totalDisplay span").text(totalPrice.toFixed(2)); //updates total price
 }
