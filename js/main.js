@@ -68,7 +68,8 @@ var sonyArray = [
     }
 ];
 
-var chosenArray; // Chosen brand 
+var chosenArray; // Chosen camera array
+var chosenBrand; // Chosen camera brand
 var selectedProducts = [] // All chosen products
 var totalPrice = 0; // Total price of all chosen products
 
@@ -99,16 +100,19 @@ $(function () {
 // EVENTS 
 $("#canonKit").on("click", function () {
     chosenArray = canonArray;
+    chosenBrand = "Canon";
     carouselSetUp(this);
 });
 
 $("#nikonKit").on("click", function () {
     chosenArray = nikonArray;
+    chosenBrand = "Nikon"; 
     carouselSetUp(this);
 });
 
 $("#sonyKit").on("click", function () {
     chosenArray = sonyArray;
+    chosenBrand = "Sony"; 
     carouselSetUp(this);
 }); 
 
@@ -122,9 +126,15 @@ $("#cameraSubmit").on("click", function () {
     // Fades out carousel and shrinks mainSelector 
     $("#myCarousel").fadeOut(300);
     $("#cameraSubmit").fadeOut(300);
-    $("#mainSelector").delay(300).animate({
+    $("#mainSelector").animate({
         height: '250px'
     }, 500);
+
+    // Opens up mainSelector and fades in extrasSelector
+    $("#mainSelector").animate({
+        height: '600px'
+    }, 700);
+    $("#extrasSelector").delay(1000).fadeIn(300);
 
     addTableItem(chosenBody);
     updateTable();

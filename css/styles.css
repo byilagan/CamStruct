@@ -103,6 +103,29 @@
     height: 50px; 
 }
 
+#extrasSelector {
+    display: none;
+}
+
+#extrasSelector ul li a {
+    color: gainsboro;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 20px
+}
+
+#extrasSelector ul li a:hover {
+    color: #252528;
+}
+
+#extrasSelector .active a:hover {
+    color: gainsboro;
+}
+
+#extrasSelector .active a{
+    background-color: #122C3D !important;
+}
+
 /* SIDEBAR */ 
 #wrapper {
   padding-left: 0;

@@ -23,11 +23,60 @@ router.get('/prices/:cameraBody', function (req, res) {
     amazon.getItemsInBrowseNode({
         Keywords: req.params.cameraBody + " Body",
         SearchIndex: "All", 
-        ResponseGroup: "OfferSummary"
+        ResponseGroup: "OfferSummary",
     }, function(err, response){
         res.json({name: req.params.cameraBody, priceSummary: response["ItemSearchResponse"]["Items"]["Item"][0]});
     });
-    console.log("GET: Search Results for " + req.params.cameraBody);
+    console.log("GET: Price Results for " + req.params.cameraBody);
+});
+
+// GET INFO FOR LENSES FOR GIVEN BRAND
+router.get('/lenses/:cameraBrand', function (req, res) { 
+    amazon.getItemsInBrowseNode({
+        Keywords: req.params.cameraBrand + " lenses",
+        SearchIndex: "All",
+        ResponseGroup: "ItemAttributes, Images"
+    }, function(err, response){
+        //res.json({name: req.params.cameraBody, priceSummary: response["ItemSearchResponse"]["Items"]["Item"][0]});
+        console.log(JSON.stringify(response));
+    });
+    console.log("GET: Search Results for " + req.params.cameraBrand + " lenses");
+});
+
+router.get('/bags', function (req, res) { 
+    amazon.getItemsInBrowseNode({
+        Keywords: "camera bags",
+        SearchIndex: "All",
+        ResponseGroup: "ItemAttributes, Images"
+    }, function(err, response){
+        //res.json({name: req.params.cameraBody, priceSummary: response["ItemSearchResponse"]["Items"]["Item"][0]});
+        console.log(JSON.stringify(response));
+    });
+    console.log("GET: Search Results for camera bags");
+});
+
+router.get('/tripods', function (req, res) { 
+    amazon.getItemsInBrowseNode({
+        Keywords: "tripods",
+        SearchIndex: "All",
+        ResponseGroup: "ItemAttributes, Images"
+    }, function(err, response){
+        //res.json({name: req.params.cameraBody, priceSummary: response["ItemSearchResponse"]["Items"]["Item"][0]});
+        console.log(JSON.stringify(response));
+    });
+    console.log("GET: Search Results for tripods");
+});
+
+router.get('/memory', function (req, res) { 
+    amazon.getItemsInBrowseNode({
+        Keywords: "memory cards",
+        SearchIndex: "All",
+        ResponseGroup: "ItemAttributes, Images"
+    }, function(err, response){
+        //res.json({name: req.params.cameraBody, priceSummary: response["ItemSearchResponse"]["Items"]["Item"][0]});
+        console.log(JSON.stringify(response));
+    });
+    console.log("GET: Search Results for memory cards ");
 });
 
 app.use("/api", router);

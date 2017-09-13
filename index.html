@@ -98,6 +98,48 @@
                         </a>
                     </div>  
                     <button id="cameraSubmit" class="btn">This One!</button>
+
+                    <div id="extrasSelector"> 
+                        <ul class="nav nav-tabs nav-justified">
+                        <li class="active"><a data-toggle="tab" href="#lenses">Lenses</a></li>
+                        <li><a data-toggle="tab" href="#bags">Bags</a></li>
+                        <li><a data-toggle="tab" href="#tripods">Tripods</a></li>
+                        <li><a data-toggle="tab" href="#memory">Memory</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                            <div id="lenses" class="tab-pane fade in active">
+                                <table id="lenses-table" class="table">
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                            <div id="bags" class="tab-pane fade">
+                                <table id="bags-table" class="table">
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                            <div id="tripods" class="tab-pane fade">
+                                <table id="tripods-table" class="table">
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                            <div id="memory" class="tab-pane fade">
+                                <table id="memory-table" class="table">
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Template for extrasSelector items-->
+                        <script id="extras-template" type="text/x-handlebars-template"> 
+                            <tr>
+                            <td><img src="{{item.image}}"> </td>
+                            <td>{{item.name}}</td>
+                            <td>{{item.formattedPrice}}</td>
+                            <td><button class="btn"> Add </button> </td>
+                            </tr>
+                        </script>   
+                    </div>
                 </div>
             </div>
             <!-- /#page-content-wrapper -->
