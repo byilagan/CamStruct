@@ -30,5 +30,5 @@ var amazon = new AmazonAPI({
 * Handlebars.js (http://handlebarsjs.com/installation.html)
 * jQuery (http://jquery.com/download/)
 * jQuery UI (http://jqueryui.com/download/
-* jQuery (http://jqueryrotate.com/)
+* jQuery Rotate (http://jqueryrotate.com/)
 * amz-products (https://www.npmjs.com/package/amz-products)
