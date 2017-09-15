@@ -1,12 +1,12 @@
 # CamStruct
 *A website that can help you create a custom camera kit at a great price*
 
-# Required
+## Required
 * Node
 * Browser (preferably chrome) 
 * Text editor
 
-# How To Use 
+## How To Use 
 1. Download zip file 
 2. Enter amazon product advertising api credentials in "server.js"
 ```javascript
@@ -21,10 +21,10 @@ var amazon = new AmazonAPI({
 4. To run node server, use "node server.js"
 5. Open index.html in browser and enjoy
 
-# Troubleshooting
+## Troubleshooting
 * The node server may stop sometimes due to request error, just restart the server and refresh
 
-# Tech Used
+## Tech Used
 * Node.js (https://nodejs.org/en/
 * Express.js (https://expressjs.com/en/starter/installing.html)
 * Handlebars.js (http://handlebarsjs.com/installation.html)
