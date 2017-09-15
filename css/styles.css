@@ -105,6 +105,7 @@
 
 #extrasSelector {
     display: none;
+    overflow: scroll;
 }
 
 #extrasSelector ul li a {
@@ -124,6 +125,20 @@
 
 #extrasSelector .active a{
     background-color: #122C3D !important;
+}
+
+#extrasSelector .tab-content td {
+    color: gainsboro; 
+}
+
+#extrasSelector .tab-content td img {
+    height: 60px; 
+    width: auto;
+}
+
+#extrasSelector .tab-content td .itemSubmit {
+    background-color: #122C3D;
+    border-color: white;
 }
 
 /* SIDEBAR */ 
@@ -186,12 +201,18 @@
     font-family: 'Montserrat', sans-serif;
 }
 
-#productTable {
+#productTable{
     font-family: 'Montserrat', sans-serif;
+    overflow: scroll;
+}
+
+#productTable tr {
+    height: 70px;
 }
 
 #productTable td {
     vertical-align: middle;
+    font-weight: 300;
 }
 
 #productTable img {

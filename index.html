@@ -19,20 +19,13 @@
         </nav>
 
         <div id="wrapper">
-
             <!-- Sidebar -->
             <div id="sidebar-wrapper">
-                <table id="productTable" class="table">
-                    <tbody>
-                        <script id="table-cell-template" type="text/x-handlebars-template"> 
-                            <tr>
-                            <td><img src="{{item.image}}"> </td>
-                            <td>{{item.name}}</td>
-                            <td>{{item.formattedPrice}}</td>
-                            </tr>
-                        </script>      
-                    </tbody>
-                </table>
+                <div id="productTable">
+                    <table class="table">
+                        <tbody></tbody>
+                    </table>
+                </div>
                 <div id="totalDisplay"> 
                     <h1> Total: $<span></span></h1>
                 </div>
@@ -54,7 +47,7 @@
                     <!-- Camera Body Selection -->
                     <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
         
-                    <!-- Indicators -->
+                        <!-- Indicators -->
                         <ol class="carousel-indicators">
                             <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
                             <li data-target="#myCarousel" data-slide-to="1"></li>
@@ -64,28 +57,7 @@
                         </ol>
 
                         <!-- Wrapper for slides -->
-                        <div class="carousel-inner">
-                            <script id="active-template" type="text/x-handlebars-template"> 
-                                <div class="item active"> 
-                                    <div class="camera-item"> 
-                                        <img src="{{activeImg.image}}">
-                                        <h1>{{activeImg.name}}</h1>
-                                        <h3>Starting from <span style="text-decoration: underline">{{activeImg.formattedPrice}}</span></h3>
-                                    </div>
-                                </div>
-                            </script>
-                            <script id="inactive-template" type="text/x-handlebars-template"> 
-                                {{#each inactiveURLs}}
-                                <div class="item">     
-                                    <div class ="camera-item">
-                                        <img src=" {{this.image}}">
-                                        <h1>{{this.name}}</h1>
-                                        <h3>Starting from <span style="text-decoration: underline">{{this.formattedPrice}}</span></h3>
-                                    </div>
-                                </div>
-                                {{/each}}
-                            </script>
-                        </div>
+                        <div class="carousel-inner"></div>
 
                         <!-- Left and right controls -->
                         <a class="left carousel-control" href="#myCarousel" data-slide="prev">
@@ -96,7 +68,8 @@
                             <span class="glyphicon glyphicon-chevron-right"></span>
                             <span class="sr-only">Next</span>
                         </a>
-                    </div>  
+                    </div>
+
                     <button id="cameraSubmit" class="btn">This One!</button>
 
                     <div id="extrasSelector"> 
@@ -130,26 +103,49 @@
                             </div>
                         </div>
 
-                        <!-- Template for extrasSelector items-->
-                        <script id="extras-template" type="text/x-handlebars-template"> 
+                        <!-- Templates-->
+                        <script id="table-cell-template" type="text/x-handlebars-template"> 
                             <tr>
                             <td><img src="{{item.image}}"> </td>
                             <td>{{item.name}}</td>
                             <td>{{item.formattedPrice}}</td>
-                            <td><button class="btn"> Add </button> </td>
+                            </tr>
+                        </script>   
+
+                        <script id="active-template" type="text/x-handlebars-template"> 
+                            <div class="item active"> 
+                                <div class="camera-item"> 
+                                    <img src="{{activeImg.image}}">
+                                    <h1>{{activeImg.name}}</h1>
+                                    <h3>Starting from <span style="text-decoration: underline">{{activeImg.formattedPrice}}</span></h3>
+                                </div>
+                            </div>
+                        </script>
+
+                        <script id="inactive-template" type="text/x-handlebars-template"> 
+                            {{#each inactiveURLs}}
+                            <div class="item">     
+                                <div class ="camera-item">
+                                    <img src=" {{this.image}}">
+                                    <h1>{{this.name}}</h1>
+                                    <h3>Starting from <span style="text-decoration: underline">{{this.formattedPrice}}</span></h3>
+                                </div>
+                            </div>
+                            {{/each}}
+                        </script>
+
+                        <script id="extras-template" type="text/x-handlebars-template"> 
+                            <tr>
+                                <td><img src="{{item.image}}"> </td>
+                                <td>{{item.name}}</td>
+                                <td>{{item.formattedPrice}}</td>
+                                <td><button class="btn itemSubmit"> Add </button> </td>
                             </tr>
                         </script>   
                     </div>
                 </div>
             </div>
-            <!-- /#page-content-wrapper -->
-
         </div>
-        <!-- /#wrapper -->
-
-     
-        
-
         <!-- SCRIPTS --> 
         <script src='js/handlebars-v4.0.10.js'></script> 
         <script src='js/jquery-3.2.1.min.js'></script> 

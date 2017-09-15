@@ -22,7 +22,7 @@ app.use(function(req, res, next) {
 router.get('/prices/:cameraBody', function (req, res) { 
     amazon.getItemsInBrowseNode({
         Keywords: req.params.cameraBody + " Body",
-        SearchIndex: "All", 
+        SearchIndex: "Electronics", 
         ResponseGroup: "OfferSummary",
     }, function(err, response){
         res.json({name: req.params.cameraBody, priceSummary: response["ItemSearchResponse"]["Items"]["Item"][0]});
@@ -34,47 +34,48 @@ router.get('/prices/:cameraBody', function (req, res) {
 router.get('/lenses/:cameraBrand', function (req, res) { 
     amazon.getItemsInBrowseNode({
         Keywords: req.params.cameraBrand + " lenses",
-        SearchIndex: "All",
-        ResponseGroup: "ItemAttributes, Images"
+        SearchIndex: "Electronics",
+        ResponseGroup: "ItemAttributes, Images, OfferSummary", 
+        Manufacturer:  req.params.cameraBrand
     }, function(err, response){
-        //res.json({name: req.params.cameraBody, priceSummary: response["ItemSearchResponse"]["Items"]["Item"][0]});
-        console.log(JSON.stringify(response));
+        res.json(response["ItemSearchResponse"]["Items"]["Item"]);
     });
     console.log("GET: Search Results for " + req.params.cameraBrand + " lenses");
 });
 
+// GET CAMERA BAGS
 router.get('/bags', function (req, res) { 
     amazon.getItemsInBrowseNode({
         Keywords: "camera bags",
-        SearchIndex: "All",
-        ResponseGroup: "ItemAttributes, Images"
+        SearchIndex: "Electronics",
+        ResponseGroup: "ItemAttributes, Images, OfferSummary"
     }, function(err, response){
-        //res.json({name: req.params.cameraBody, priceSummary: response["ItemSearchResponse"]["Items"]["Item"][0]});
-        console.log(JSON.stringify(response));
+        res.json(response["ItemSearchResponse"]["Items"]["Item"]);
     });
     console.log("GET: Search Results for camera bags");
 });
 
+// GET TRIPODS
 router.get('/tripods', function (req, res) { 
     amazon.getItemsInBrowseNode({
         Keywords: "tripods",
-        SearchIndex: "All",
-        ResponseGroup: "ItemAttributes, Images"
+        SearchIndex: "Electronics",
+        ResponseGroup: "ItemAttributes, Images, OfferSummary"
     }, function(err, response){
-        //res.json({name: req.params.cameraBody, priceSummary: response["ItemSearchResponse"]["Items"]["Item"][0]});
-        console.log(JSON.stringify(response));
+        res.json(response["ItemSearchResponse"]["Items"]["Item"]);
     });
     console.log("GET: Search Results for tripods");
 });
 
+// GET MEMORY CARDS
 router.get('/memory', function (req, res) { 
     amazon.getItemsInBrowseNode({
         Keywords: "memory cards",
-        SearchIndex: "All",
-        ResponseGroup: "ItemAttributes, Images"
+        SearchIndex: "Electronics",
+        ResponseGroup: "ItemAttributes, Images, OfferSummary"
     }, function(err, response){
-        //res.json({name: req.params.cameraBody, priceSummary: response["ItemSearchResponse"]["Items"]["Item"][0]});
         console.log(JSON.stringify(response));
+        res.json(response["ItemSearchResponse"]["Items"]["Item"]);
     });
     console.log("GET: Search Results for memory cards ");
 });
