@@ -1,6 +1,11 @@
 # CamStruct
 *A website that can help you create a custom camera kit at a great price*
 
+![alt text](screenshots/camstruct1.png "Description goes here")
+![alt text](screenshots/camstruct2.png "Description goes here")
+![alt text](screenshots/camstruct3.png "Description goes here")
+
+
 ## Required
 * Node
 * Browser (preferably chrome) 
